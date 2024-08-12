@@ -144,3 +144,94 @@ Create a treemap to display ```ActiveEmployees``` by ```Department``` and ```Job
 ![image](https://github.com/user-attachments/assets/305b3ced-45f3-4017-8cbd-9be40b30cd96)
 
 </div>
+
+
+### 5.key insights uncovered so far
+1. Atlas Labs has employed over 1,470 people.
+2. Atlas Labs currently employes over 1,200 people.
+3. The largest department by far is Technology
+4. The attrition rate for employees leaving the organization is 16%
+
+In this case, I want to find out what factors impact employees attrition.
+
+
+## Second Step: Find out next layer of key HR metrics that focus on Diversity and Inclusion
+
+### 1.Demographics - Age & Gender
+Create two card visuals to display the minimum and maximum values for ```Age```
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/2f68f61f-d4e8-4775-9484-32c0f357f8d6)
+
+</div>
+
+Now I want ot create a conditional column called ```AgeBins``` that separates employees ages by bins in the following structure:
+```<\20,20-29,30-39,40-49,50>```
+
+The Conditional Column setting looks like:
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/90fbd1be-f008-4656-bdcc-a90667c25328)
+</div>
+
+After that, I created two stacked column chart, and I set a page filter which only shows active employees in the company. And now you can see how employees is different in both age groups and gender
+<div align="center">
+
+![image](https://github.com/user-attachments/assets/54bd1b9c-12dc-429e-956d-de139a53400a)
+</div>
+
+### 2.Demographics - Marital Status and Ethnicity
+
+Now I want to look at further employee information regarding marital status and ethnicity       
+<br>
+
+Firstly, I use a Donut Chart to display the counts of all employees by ```MaritalStatus```. After that, I create a new measure named ```Averagesalary```, and I use a Line and stacked column chart to display the count of all employees and their average salary by ```Ethnicity```.
+
+The graph below shows the data for all active employees.
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/8dcc7aef-1e79-4ecf-aca2-48c168ad7aba)
+
+</div>
+
+
+### 3. Performance Tracker: Part 1
+
+Now I want to help the HR team to have a view where they can continually track an individual employee's performance scores based on their yearly performance reviews.
+
+<br>
+
+Firstly, I created a calculated column named ```FullName``` in the ```DimEmployee``` table that combines ```FirstName``` and ```LastName```
+
+```dax
+FullName = COMBINEVALUES(" ",DimEmployee[FirstName],DimEployee[LastName])
+```
+
+A slicer has been created, so we will be able to filter the report page based on the employee's full name. And I create a card visual that can shows the `HireDate` of selected Employee. Then, I create a new masure ```LastReviewDate``` that gets the last performance review for the selected individual.
+
+```dax
+LastReviewDate = IF(
+MAX(FactPerformanceRating[ReviewDate]) = BLANK (), "No Review Yet",
+Max(FactPerformanceRating[ReviewDate])
+)
+```
+
+Next, I create a new measure called ```NextReviewDate``` that calculates when the next review is due. It should be 365 days after the ```LastReviewDate```, so here is the DAX Function:
+
+```dax
+Next Review Date = VAR reviewOrHire =
+IF(
+    MAX(FactPerformanceRating[ReviewDate]) = BLANK(),
+    MAX(DimEmployee[HireDate]),
+    MAX(FactPerformanceRating[ReviewDate])
+)
+RETURN
+    reviewOrHire + 365
+```
+
+Once we created the new measure and create a new card visual on that, we can see the employee's start date, last review date and the next review date. As shown in the graph below.
+
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/e391fb19-757e-4057-8455-07d86dd6309f)
+</div>
