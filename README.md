@@ -281,6 +281,7 @@ SelfRating = CALCULATE(
 )
 ```
 <div align="center">
+    
 ![image](https://github.com/user-attachments/assets/f35c3195-5fe8-4cbc-92a0-787afc3cb1c9)
 </div>
 
