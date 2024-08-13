@@ -235,3 +235,53 @@ Once we created the new measure and create a new card visual on that, we can see
     
 ![image](https://github.com/user-attachments/assets/e391fb19-757e-4057-8455-07d86dd6309f)
 </div>
+
+### 4. Performance Tracker: Part 2
+Now I want to look at the information on their individual review ratings
+
+Firstly, I created a ```JobSatisfaction``` measure inside the ```_Measures``` tables, and it indicates the maximum value inside ```FactPerformanceRating[JobSatisfaction]``` level.
+<br>
+And now I found out that the other three satisfaction metrics do not have an active relationship to ```DimsSatisfiedLevel```. In this case, I will create three new measures ```EnvironmentSatisfaction```, ```RelationshipSatisfaction```, and ```WorkLifeBalance```.
+
+```dax
+EnvironmentSatisfaction =
+CALCULATE(
+    MAX(FactPerformanceRating[EnvironmentSatisfaction]),
+    USERELATIONSHIP(FactPerformanceRating[EnvironmentSatisfaction], DimSatisfiedLevel[SatisfactionID])
+)
+```
+```dax
+RelationshipSatisfaction =
+CALCULATE(
+    MAX(FactPerformanceRating[RelationshipSatisfaction]),
+    USERELATIONSHIP(FactPerformanceRating[RelationshipSatisfaction], DimSatisfiedLevel[SatisfactionID])
+)
+```
+```dax
+WorkLifeBalance =
+CALCULATE(
+    MAX(FactPerformanceRating[WorkLifeBalance]),
+    USERELATIONSHIP(FactPerformanceRating[WorkLifeBalance], DimSatisfiedLevel[SatisfactionID])
+)
+```
+<br>
+Create two more measures, ```SelfRating``` and ```ManagerRating```, which provide the max rating id.
+
+```dax
+SelfRating = CALCULATE(
+    MAX(FactPerformanceRating[SelfRating]),
+    USERELATIONSHIP(FactPerformanceRating[SelfRating], DimRatingLevel[RatingID]))
+)
+```
+
+```dax
+SelfRating = CALCULATE(
+    MAX(FactPerformanceRating[ManagerRating]),
+    USERELATIONSHIP(FactPerformanceRating[ManagerRating], DimRatingLevel[RatingID]))
+)
+```
+<div align="center">
+![image](https://github.com/user-attachments/assets/f35c3195-5fe8-4cbc-92a0-787afc3cb1c9)
+</div>
+
+As you can see from the dashboard here, this Power BI dashboard tracks an employee's (For example, Estelle Chung) performance and satisfaction metrics from 2019 to 2022. It displays key dates like start date, last review, and next review. The dashboard features six line graphs showing trends in Work-Life Balance, Environment Satisfaction, Self Rating, Relationship Satisfaction, Job Satisfaction, and Manager Rating over time. Each metric is rated on a scale from 1 (Unacceptable/Very Dissatisfied) to 5 (Above and Beyond/Very Satisfied). This visual representation allows for quick assessment of the employee's performance trends and satisfaction levels across various aspects of their work experience, enabling easy identification of strengths, areas for improvement, and overall progress over time.
