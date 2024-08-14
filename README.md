@@ -126,7 +126,7 @@ The figure shows like :
 ![image](https://github.com/user-attachments/assets/7df49f8e-0c17-4789-8f92-62605f159067)
 </div>
 
-### 4. Analyzing Departments and Job Roles
+### 5. Analyzing Departments and Job Roles
 It is essential to ask the HR team working with department managers to understand their teams and what type of typical roles they are hiring into the organization. This will enable every department to plan for new hiring requests in the future. 
 <br>
 
@@ -146,7 +146,7 @@ Create a treemap to display ```ActiveEmployees``` by ```Department``` and ```Job
 </div>
 
 
-### 5.key insights uncovered so far
+### 6.key insights uncovered so far
 1. Atlas Labs has employed over 1,470 people.
 2. Atlas Labs currently employes over 1,200 people.
 3. The largest department by far is Technology
@@ -286,3 +286,53 @@ SelfRating = CALCULATE(
 </div>
 
 As you can see from the dashboard here, this Power BI dashboard tracks an employee's (For example, Estelle Chung) performance and satisfaction metrics from 2019 to 2022. It displays key dates like start date, last review, and next review. The dashboard features six line graphs showing trends in Work-Life Balance, Environment Satisfaction, Self Rating, Relationship Satisfaction, Job Satisfaction, and Manager Rating over time. Each metric is rated on a scale from 1 (Unacceptable/Very Dissatisfied) to 5 (Above and Beyond/Very Satisfied). This visual representation allows for quick assessment of the employee's performance trends and satisfaction levels across various aspects of their work experience, enabling easy identification of strengths, areas for improvement, and overall progress over time.
+
+
+### 5. Key insights from Second Part
+1. Majority of employees are between 20-29 years old.
+2. Currently, Atlas Labs employe 2.7% more women than men.
+3. Employees who identify as non-binary make up 8.5% of total employees.
+4. Employees who identify as White have the highest average salary.
+5. Employees who identify as mixed or multiple ethnic groups have one of the lowest average salaries.
+
+Now, there is an interesting question that comes out of my mind from the insights I've uncovered:
+    `Does our demographics insights impact employee attrition?`
+
+## Final Step: Understanding Employee Attrition
+
+Firstly,I've create a card visual that shows the `Attritoin Rate`, a stacked column chart to displays the `%Attrition Rate` for each department and job role.
+<br>
+Secondly,I want to understand the attrition rate based on `HireDate`. So I need to create a new measure called `InactiveEmployeesDate`. Then, I want to create a new measure called `%Attrition Rate Date` which calculates the rate of attrition based on `InactiveEmployeesDate` and `TotalEmployeesDate`. After that, I created a line chart to displays the `%Attrition Rate Date` over time.
+
+```dax
+InactiveEmployeesDate = CALCULATE([InactiveEmployees],
+    USERELATIONSHIP(DimEmployee[HireDate], DimDate[Date])
+)
+```
+
+```dax
+%Attrition Rate Date = DIVIDE([InactiveEmployees], [TotalEmployeesDate])
+```
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/f0e65500-ef64-4ac4-bd3e-ee37e0b5a5ee)
+</div>
+
+As you can see from the graph,
+
+Key Insights from Employee Attrition Analysis
+
+1. Overall Attrition Rate
+- The overall attrition rate is **16.1%**, representing the percentage of employees who have left the organization.
+
+2. Attrition Rate by Department and Job Role
+- The bar chart breaks down the attrition rate by department and job role:
+  - **Sales**: Highest attrition rate with significant departures in roles like Analytics and Engineering.
+  - **Human Resources**: Moderate attrition rate, with HR Executives accounting for a notable portion of the departures.
+  - **Technology**: A high attrition rate distributed across various roles, including Engineering and Data Science.
+
+3. Attrition by Hire Date
+- The line chart visualizes the attrition rate based on hire dates from **2012 to the present**:
+  - A **notable spike in 2016**, indicating a possible organizational event or external factor affecting employee turnover.
+  - Post-2018 shows more stable attrition rates, with fewer extreme fluctuations, especially after 2020.
+
