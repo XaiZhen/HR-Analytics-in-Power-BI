@@ -300,6 +300,8 @@ Now, there is an interesting question that comes out of my mind from the insight
 
 ## Final Step: Understanding Employee Attrition
 
+### 1. Attrition rate by Department & Job role
+
 Firstly,I've create a card visual that shows the `Attritoin Rate`, a stacked column chart to displays the `%Attrition Rate` for each department and job role.
 <br>
 Secondly,I want to understand the attrition rate based on `HireDate`. So I need to create a new measure called `InactiveEmployeesDate`. Then, I want to create a new measure called `%Attrition Rate Date` which calculates the rate of attrition based on `InactiveEmployeesDate` and `TotalEmployeesDate`. After that, I created a line chart to displays the `%Attrition Rate Date` over time.
@@ -336,3 +338,89 @@ Key Insights from Employee Attrition Analysis
   - A **notable spike in 2016**, indicating a possible organizational event or external factor affecting employee turnover.
   - Post-2018 shows more stable attrition rates, with fewer extreme fluctuations, especially after 2020.
 
+### 2. Other factors that may affect attrition
+
+Since I want to discover more about what other factors may affect on employee attrition. I want to design more figure to explore. As you can see from the table below. There is a stacked column chart which shows the attrition by travel frequency, attrition by overtime requirement
+
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/273edca2-c17b-49da-861c-edb4b9f409ca)
+</div>
+
+Key Insights from Employee Attrition Analysis
+
+ 1. Attrition by Travel Frequency
+- **Frequent Travelers**: Highest attrition rate despite fewer employees in this group.
+- **No Travel**: Lowest attrition rate, with "Some Travel" employees falling in between.
+
+ 2. Attrition by Overtime Requirement
+- Employees required to work **overtime** show a **significantly higher attrition rate** compared to those who do not have overtime requirements.
+
+ 3. Attrition by Tenure
+- **Employees with less than 2 years of tenure** show the highest attrition rates, especially those with around 1 year at the company.
+- **Longer tenure** (6+ years) is associated with a lower attrition rate, indicating that employees who stay longer are less likely to leave.
+
+I suggest that frequent travel, overtime, and shorter tenure are key factors contributing to higher employee turnover.
+
+
+### 3. Format the Dashboard: Cleaning up the color, chart and title formatting
+
+I've changed the format,size, color, theme of the graph. As you can see from the dashboard below.
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/2a43c1c8-9cdd-4913-b89a-c2374b3031f4)
+</div>
+
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/0fbb938b-6c81-4db2-8604-e227c4075423)
+</div>
+
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/d690b0e8-9b82-4f51-a9ca-44a2c98a5b9e)
+</div>
+
+<div align="center">
+    
+![image](https://github.com/user-attachments/assets/d848ab30-dabd-4c61-a3be-2fafe9b3d699)
+</div>
+
+# Atlas Labs HR Analytics Dashboard
+
+## Overview
+This dashboard provides comprehensive insights into Atlas Labs' workforce, covering various aspects such as employee demographics, performance, and attrition.
+
+## Key Metrics
+- **Total Employees**: 1470
+- **Active Employees**: 1233
+- **Inactive Employees**: 237
+- **Attrition Rate**: 16.1%
+
+## Employee Demographics
+- **Age Range**: 18 to 51 years old
+- **Largest Age Group**: 20-29 years
+- **Gender Distribution**: Majority male, with female representation increasing in younger age groups
+- **Marital Status**: 
+  - 42.45% married 
+  - 37.35% single 
+  - 20.2% divorced
+
+## Performance Insights
+- **Job Satisfaction**: Declining trend from 2020 to 2022
+- **Relationship Satisfaction**: Sharp decline from 2020 to 2022
+- **Work-Life Balance**: Fluctuating, with a significant dip in 2021 but recovery in 2022
+- **Manager Ratings**: Steady decline from 2020 to 2022
+
+## Attrition Analysis
+- **Highest Attrition**: Sales Representatives and Facilities roles
+- **Travel Impact**: Frequent travelers have the highest attrition rate
+- **Overtime**: Employees working overtime show higher attrition rates
+- **Tenure**: Highest attrition observed in the first two years of employment
+
+## Business Insights
+- **Retention Focus**: Prioritize retention strategies for employees in their first two years, particularly in sales and facilities roles.
+- **Work-Life Balance**: Implement policies to improve work-life balance, especially for frequent travelers and those working overtime.
+- **Management Training**: Address the declining manager ratings through leadership development programs.
+- **Diversity Initiatives**: Focus on increasing diversity, particularly in older age groups and senior positions.
+- **Employee Satisfaction**: Investig
